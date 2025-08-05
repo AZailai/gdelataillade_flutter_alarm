@@ -150,10 +150,12 @@ class AlarmService : Service() {
 
         // Set up audio completion listener
         audioService?.setOnAudioCompleteListener {
+            volumeService?.requestAudioFocus()
+            volumeService?.abandonAudioFocus()
             if (!alarmSettings.loopAudio) {
                 vibrationService?.stopVibrating()
                 volumeService?.restorePreviousVolume(showSystemUI)
-                volumeService?.abandonAudioFocus()
+//                volumeService?.abandonAudioFocus()
             }
         }
 
@@ -251,6 +253,7 @@ class AlarmService : Service() {
 
             // Safely call methods on 'volumeService' and 'audioService'
             volumeService?.restorePreviousVolume(showSystemUI)
+            volumeService?.requestAudioFocus()
             volumeService?.abandonAudioFocus()
 
             audioService?.stopAudio(id)
@@ -275,6 +278,7 @@ class AlarmService : Service() {
         audioService?.cleanUp()
         vibrationService?.stopVibrating()
         volumeService?.restorePreviousVolume(showSystemUI)
+        volumeService?.requestAudioFocus()
         volumeService?.abandonAudioFocus()
 
         AlarmRingingLiveData.instance.update(false)
