@@ -83,10 +83,7 @@ class NotificationHandler(private val context: Context) {
             .setDeleteIntent(stopPendingIntent)
             .setSound(null)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-
-        if (fullScreen) {
-            notificationBuilder.setFullScreenIntent(pendingIntent, true)
-        }
+            .setFullScreenIntent(pendingIntent, true)
 
         notificationSettings.let {
             if (it.stopButton != null) {

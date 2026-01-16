@@ -155,7 +155,7 @@ class AlarmService : Service() {
             if (!alarmSettings.loopAudio) {
                 vibrationService?.stopVibrating()
                 volumeService?.restorePreviousVolume(showSystemUI)
-//                volumeService?.abandonAudioFocus()
+                volumeService?.abandonAudioFocus()
             }
         }
 
@@ -264,6 +264,7 @@ class AlarmService : Service() {
                 stopSelf()
             }
 
+            stopForeground(true)
             stopForeground(true)
         } catch (e: IllegalStateException) {
             Log.e(TAG, "Illegal State: ${e.message}", e)
